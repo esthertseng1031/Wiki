@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    {% autoescape off %}
-        {{ content }}
-    {% endautoescape %}
+
+    <!-- Mark "content" as not requiring further HTML escaping prior to output. -->
+    {{ content|safe|escape }}
+
 {% endblock %}

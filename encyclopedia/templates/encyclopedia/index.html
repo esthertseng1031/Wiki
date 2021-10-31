@@ -9,7 +9,8 @@
 
     <ul>
         {% for entry in entries %}
-            <li>{{ entry }}</li>
+            <!-- If user clicks on any entry name, it should be taken directly to that entry page. -->
+            <li><a href=/wiki/{{entry}}>{{ entry }}</a></li>
         {% endfor %}
     </ul>
 

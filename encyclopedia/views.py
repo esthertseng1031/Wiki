@@ -1,9 +1,11 @@
-import markdown
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
+from markdown2 import Markdown
 from . import util
 
 
 def index(request):
+
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
@@ -24,12 +26,23 @@ def entry(request, title):
         })
     
     else:
-        text = util.get_entry(title)
+        markdown = util.get_entry(title)
         
         # Convert the Markdown into HTML
-        html = markdown.markdown(text)
+        markdowner = Markdown()
+        content = markdowner.convert(markdown)
         return render(request, "encyclopedia/entry.html", {
             "title": title.capitalize(),
-            "content": html
+            "content": content
         })
-
+def search(request):
+    """
+    Allow the user to type a query into the search box in 
+    the sidebar to search for an encyclopedia entry.
+    """
+    
+    # If the query matches the name of an encyclopedia entry, 
+    # the user should be redirected to that entry’s page.
+    if request.method == "GET":
+        title = request.GET.get("q")
+        return HttpResponseRedirect(f"/wiki/{title}")
