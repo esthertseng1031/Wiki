@@ -1,0 +1,3 @@
+C is a general-purpose, procedural computer programming language supporting **structured programming**, **lexical variable scope**, and **recursion**, with a **static type system**.
+
+Many later languages have borrowed directly or indirectly from C, including C++, C#, Unix's C shell, D, Go, Java, JavaScript (including transpilers), Julia, Limbo, LPC, Objective-C, Perl, PHP, [Python](/wiki/Python), Ruby, Rust, Swift, Verilog and SystemVerilog (hardware description languages).
