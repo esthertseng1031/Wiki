@@ -1,5 +1,5 @@
-# Go
+<h1>Go</h1>
 
-Go is syntactically similar to [C](/wiki/C), but with **memory safety**, **garbage collection**, **structural typing**, and **CSP-style concurrency**.
+<p>Go is syntactically similar to <a href="/wiki/C">C</a>, but with memory safety, garbage collection, structural typing, and CSP-style concurrency.</p>
 
-The language is often referred to as **Golang** because of its domain name, golang.org, but the proper name is Go.
+<p>The language is often referred to as <strong>Golang</strong> because of its domain name, golang.org, but the proper name is Go.</p>

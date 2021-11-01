@@ -7,7 +7,12 @@
 {% block body %}
     <h1>Edit {{ title }}</h1>
     
-    {{ markdown}}
-    
+    <form action=/edit/{{title}} method="post">
+        {% csrf_token %}
+        <input type="hidden" name="title" value="{{title}}">
+        {{ markdown }}
+        <!-- Click "Save" to save the new page. -->
+        <input type="submit" value="Save">
+    </form>
 
 {% endblock %}

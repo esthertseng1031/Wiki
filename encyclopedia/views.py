@@ -133,3 +133,17 @@ def edit(request, title):
             "title": title,
             "markdown": pre
         })
+    else:
+        # Take in the data the user edited and save it as edited
+        edited = EditEntryForm(request.POST)
+
+        # Check if form data is valid (server-side)
+        if edited.is_valid():
+            markdown = edited.cleaned_data["markdown"]
+
+            # Save the changes made to that entry to disk
+            util.save_entry(title, markdown)
+
+            # Once the entry is saved, the user should be redirected back to that entry’s page.
+            return HttpResponseRedirect(f"/wiki/{title}")
+
