@@ -30,10 +30,17 @@ def entry(request, title):
     2. If the entry does exist, the user should be presented with a page
     that displays the content of the entry.
     """
-    
+
+    # Get the proper case of entry name
+    entries = util.list_entries()
+    for entry in entries:
+        entry_lower = entry.lower()
+        if title.lower() == entry_lower:
+            title = entry
+
     if not util.get_entry(title):
         return render(request, "encyclopedia/error.html", {
-            "title": title.capitalize()
+            "title": title
         })
     
     else:
@@ -43,7 +50,7 @@ def entry(request, title):
         markdowner = Markdown()
         content = markdowner.convert(markdown)
         return render(request, "encyclopedia/entry.html", {
-            "title": title.capitalize(),
+            "title": title,
             "content": content
         })
 def search(request):
@@ -112,5 +119,17 @@ def create(request):
         "form": NewEntryForm()
     })
 
-
-
+def edit(request, title):
+    if request.method == "GET":
+        markdown = util.get_entry(title)
+        
+        # Convert the Markdown into HTML
+        markdowner = Markdown()
+        content = markdowner.convert(markdown)
+        
+        # The textarea should be pre-populated with the existing Markdown content of the page.
+        pre = EditEntryForm(initial={'markdown': content})
+        return render(request, "encyclopedia/edit.html", {
+            "title": title,
+            "markdown": pre
+        })
