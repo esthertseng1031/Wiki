@@ -3,6 +3,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from markdown2 import Markdown
 from . import util
+import random
 
 class NewEntryForm(forms.Form):
     # Users should be able to enter a title for the page.
@@ -123,12 +124,8 @@ def edit(request, title):
     if request.method == "GET":
         markdown = util.get_entry(title)
         
-        # Convert the Markdown into HTML
-        markdowner = Markdown()
-        content = markdowner.convert(markdown)
-        
         # The textarea should be pre-populated with the existing Markdown content of the page.
-        pre = EditEntryForm(initial={'markdown': content})
+        pre = EditEntryForm(initial={'markdown': markdown})
         return render(request, "encyclopedia/edit.html", {
             "title": title,
             "markdown": pre
@@ -147,3 +144,8 @@ def edit(request, title):
             # Once the entry is saved, the user should be redirected back to that entry’s page.
             return HttpResponseRedirect(f"/wiki/{title}")
 
+# Take user to a random encyclopedia entry.
+def random_page(request):
+    entries = util.list_entries()
+    result = random.choice(entries)
+    return HttpResponseRedirect(f"/wiki/{result}")
