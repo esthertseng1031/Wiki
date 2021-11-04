@@ -9,7 +9,20 @@
     
     <form action="{% url 'create' %}" method="post">
         {% csrf_token %}
-        {{ form }}
+        <div class="relative">
+            <div id="label_title">
+                {{ form.title.label }}:
+            </div>
+            <div id="input_title">
+                {{ form.title }}
+            </div>
+            <div class="label_markdown">
+                {{ form.markdown.label }}:
+            </div>
+            <div class="input_markdown">
+                {{ form.markdown }}
+            </div>
+        </div>
         <!-- Click "Save" to save the new page. -->
         <input type="submit" value="Save">
     </form>

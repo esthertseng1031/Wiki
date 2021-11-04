@@ -9,8 +9,15 @@
     
     <form action=/edit/{{title}} method="post">
         {% csrf_token %}
-        <input type="hidden" name="title" value="{{title}}">
-        {{ markdown }}
+        <div class="relative">
+            <input type="hidden" name="title" value="{{title}}">
+            <div class="label_markdown">
+                {{ markdown.markdown.label }}:
+            </div>
+            <div class="input_markdown">
+                {{ markdown.markdown }}
+            </div>
+        </div>
         <!-- Click "Save" to save the new page. -->
         <input type="submit" value="Save">
     </form>
